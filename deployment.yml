@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: football
+  labels:
+    app: football
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: football
+  template:
+    metadata:
+      labels:
+        app: football
+    spec:
+      containers:
+      - name: football
+        image: robertbrem/football:0.0.1
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /football/resources/players
+            port: 8080
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: football
+spec:
+  selector:
+    app: football
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    nodePort: 31082
+  type: NodePort
