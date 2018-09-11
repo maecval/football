@@ -30,7 +30,7 @@ podTemplate(label: 'mypod', containers: [
             sh "git config user.name \"Jenkins\""
             sh "git tag -a ${env.VERSION} -m \"${env.VERSION}\""
             withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/khinkali/sink.git --tags"
+                sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robertbrem/football.git --tags"
             }
 
             container('docker') {
