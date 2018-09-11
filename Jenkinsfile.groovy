@@ -34,16 +34,16 @@ podTemplate(label: 'mypod', containers: [
             }
 
             container('docker') {
-                sh "docker build -t robertbrem/football:${env.VERSION} ."
+                sh "docker build -t vmach/football:${env.VERSION} ."
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh "docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}"
                 }
-                sh "docker push robertbrem/football:${env.VERSION}"
+                sh "docker push vmach/football:${env.VERSION}"
             }
         }
 
         stage('deploy') {
-            sh "sed -i -e 's~image: robertbrem/football:0.0.1~image: robertbrem/football:${env.VERSION}~' deployment.yml"
+            sh "sed -i -e 's~image: vmach/football:0.0.1~image: vmach/football:${env.VERSION}~' deployment.yml"
             container('kubectl') {
                 sh "kubectl apply -f deployment.yml"
             }

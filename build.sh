@@ -1,1 +1,1 @@
-docker build -t robertbrem/football:0.0.1 .
+docker build -t vmach/football:0.0.1 .

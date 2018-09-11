@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: football
+  name: vm-football
   labels:
-    app: football
+    app: vm-football
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: football
+      app: vm-football
   template:
     metadata:
       labels:
-        app: football
+        app: vm-football
     spec:
       containers:
-      - name: football
-        image: robertbrem/football:0.0.1
+      - name: vm-football
+        image: vmach/football:0.0.1
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -33,13 +33,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: football
+  name: vm-football
 spec:
   selector:
-    app: football
+    app: vm-football
   ports:
   - protocol: TCP
     port: 8080
     targetPort: 8080
-    nodePort: 31082
+    nodePort: 31089
   type: NodePort
