@@ -9,7 +9,7 @@ public class PlayersResource {
 
     @GET
     public String getPlayers() {
-        return "player1, player2";
+        return "player1, player2, ch open";
     }
 
 }
