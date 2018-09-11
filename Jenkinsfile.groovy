@@ -12,7 +12,7 @@ podTemplate(label: 'mypod', containers: [
     node('mypod') {
 
         stage('checkout & unit tests & build') {
-            git url: 'https://github.com/vmach/football'
+            git url: 'https://github.com/maecval/football'
             container('maven') {
                 sh 'mvn clean package'
             }
@@ -29,8 +29,8 @@ podTemplate(label: 'mypod', containers: [
             sh "git config user.email \"jenkins@khinkali.ch\""
             sh "git config user.name \"Jenkins\""
             sh "git tag -a ${env.VERSION} -m \"${env.VERSION}\""
-            withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/vmach/football.git --tags"
+            withCredentials([usernamePassword(credentialsId: 'maecval-github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/maecval/football.git --tags"
             }
 
             container('docker') {
