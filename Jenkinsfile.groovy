@@ -26,8 +26,8 @@ podTemplate(label: 'mypod', containers: [
             container('maven') {
                 sh "mvn versions:set -DnewVersion=${env.VERSION}"
             }
-            sh "git config user.email \"jenkins@khinkali.ch\""
-            sh "git config user.name \"Jenkins\""
+            sh "git config user.email \"valentin.maechler@gmail.com\""
+            sh "git config user.name \"maecval\""
             sh "git tag -a ${env.VERSION} -m \"${env.VERSION}\""
             withCredentials([usernamePassword(credentialsId: 'maecval-github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                 sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/maecval/football.git --tags"
