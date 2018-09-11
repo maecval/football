@@ -1,0 +1,1 @@
+docker build -t robertbrem/football:0.0.1 .
