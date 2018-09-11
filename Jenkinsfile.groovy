@@ -35,7 +35,7 @@ podTemplate(label: 'mypod', containers: [
 
             container('docker') {
                 sh "docker build -t vmach/football:${env.VERSION} ."
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: 'vmach-dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh "docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}"
                 }
                 sh "docker push vmach/football:${env.VERSION}"
